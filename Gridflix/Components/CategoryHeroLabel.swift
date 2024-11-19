@@ -1,3 +1,11 @@
+//
+//  CategoryHeroLabel.swift
+//  Gridflix
+//
+//  Created by Jenny Gallegos Cardenas on 18/10/24.
+//
+import UIKit
+
 final class CategoryHeroLabel: UILabel {
     init(frame: CGRect = .zero, text: String) {
         super.init(frame: frame)

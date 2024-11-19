@@ -7,13 +7,21 @@
 
 import UIKit
 
+struct WelcomeModel {
+    var welcomeText: String
+    var imageName: String
+    var registerText: String
+    var privacyText: String
+    var signInText: String
+}
+
 final class WelcomeUIView: UIView {
     // MARK: - Properties
     // TODO: - Refactor into bindings
-    let text: String
-    let imageName: String
+    private var text: String
+    private var imageName: String
     weak var welcomeDelegate: WelcomeDelegate?
-    
+
     // MARK: - Lifetime
     init(
         frame: CGRect = .zero,
@@ -27,11 +35,12 @@ final class WelcomeUIView: UIView {
         super.init(frame: frame)
         configureLayout()
     }
-    
+
+    @available(*, deprecated, message: "Deprecated in favour of dependency injection")
     required init?(coder: NSCoder) {
-        fatalError("required init?(coder:) was not implemented")
+        fatalError("required init?(coder:) was deprecated in favour of dependency injection")
     }
-    
+
     // MARK: - Lazy Properties
     lazy var topBarContainer: UIStackView = {
         let container = UIStackView()
@@ -42,7 +51,7 @@ final class WelcomeUIView: UIView {
         container.spacing = 5
         return container
     }()
-    
+
     lazy var logoView: UIImageView = {
         let image = UIImage(named: "netflix_n_logo")
         let imageView = UIImageView(image: image)
@@ -50,12 +59,12 @@ final class WelcomeUIView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     lazy var fillerView: UIView = {
         let view = UIView()
         return view
     }()
-    
+
     lazy var privacyButton: UIButton = {
         let button = UIButton()
         let config = UIButton.Configuration.borderless()
@@ -68,7 +77,7 @@ final class WelcomeUIView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     lazy var signInButton: UIButton = {
         let button = UIButton()
         let config = UIButton.Configuration.borderless()
@@ -81,7 +90,7 @@ final class WelcomeUIView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     lazy var imageView: GradientImageView = {
         let image = UIImage(named: imageName)
         let topColor = CGColor(red: 47.0 / 255.0, green: 76.0 / 255.0, blue: 233.0 / 255.0, alpha: 0.0) // 2E4CE9, 0%
@@ -95,7 +104,7 @@ final class WelcomeUIView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     lazy var welcomeText: UILabel = {
         let textView = UILabel()
         let fontSize = UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
@@ -109,7 +118,7 @@ final class WelcomeUIView: UIView {
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
-    
+
     lazy var registerContainer: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -119,7 +128,7 @@ final class WelcomeUIView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
+
     lazy var registerButton: UIButton = {
         let button = UIButton(frame: self.frame)
         let fontSize = UIFont.preferredFont(forTextStyle: .title1).pointSize

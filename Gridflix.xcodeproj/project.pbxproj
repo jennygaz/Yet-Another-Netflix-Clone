@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		178947372CA381ED00598BE3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 178947362CA381ED00598BE3 /* Lottie */; };
+		17BAC0A72CC2DB1E0078F69D /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = 17BAC0A62CC2DB1E0078F69D /* Perception */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				178947372CA381ED00598BE3 /* Lottie in Frameworks */,
+				17BAC0A72CC2DB1E0078F69D /* Perception in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +133,7 @@
 			name = Gridflix;
 			packageProductDependencies = (
 				178947362CA381ED00598BE3 /* Lottie */,
+				17BAC0A62CC2DB1E0078F69D /* Perception */,
 			);
 			productName = Gridflix;
 			productReference = 17A844032C936DAF008721D5 /* Gridflix.app */;
@@ -216,6 +219,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				178947352CA381ED00598BE3 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				17BAC0A52CC2DB1E0078F69D /* XCRemoteSwiftPackageReference "swift-perception" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 17A844042C936DAF008721D5 /* Products */;
@@ -315,7 +319,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.griddynamics.Gridflix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -344,7 +348,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.griddynamics.Gridflix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -590,6 +594,14 @@
 				minimumVersion = 4.5.0;
 			};
 		};
+		17BAC0A52CC2DB1E0078F69D /* XCRemoteSwiftPackageReference "swift-perception" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-perception";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -597,6 +609,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 178947352CA381ED00598BE3 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		17BAC0A62CC2DB1E0078F69D /* Perception */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17BAC0A52CC2DB1E0078F69D /* XCRemoteSwiftPackageReference "swift-perception" */;
+			productName = Perception;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

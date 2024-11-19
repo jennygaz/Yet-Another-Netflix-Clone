@@ -17,17 +17,20 @@ final class WelcomeViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
-        let welcomeView = WelcomeUIView(
-            frame: view.frame,
-            text: "Unlimited movies, TV shows & more",
-            imageName: "WelcomeImage",
-            delegate: self)
+        let welcomeView = HomeHeaderView(frame: view.frame)
+//        WelcomeUIView(
+//            frame: view.frame,
+//            text: "Unlimited movies, TV shows & more",
+//            imageName: "WelcomeImage",
+//            delegate: self)
         self.view = welcomeView
+//        addChild(hostingController)
+//        view = hostingController.view
     }
 
     // MARK: - Private Methods
     private func configureNavBar() {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 }
 

@@ -19,6 +19,9 @@ extension UIButton.Configuration {
 }
 
 final class OutlineButton: UIButton {
+    var shouldHighlight: Bool = false
+    var wasHighlighted: Bool = false
+
     override func updateConfiguration() {
         guard let configuration = configuration else {
             return
@@ -34,12 +37,14 @@ final class OutlineButton: UIButton {
         let foregroundColor: UIColor
         let backgroundColor: UIColor
         let baseColor = updatedConfiguration.baseForegroundColor ?? UIColor.tintColor
-        
+        if shouldHighlight && isHighlighted {
+            wasHighlighted.toggle()
+        }
         switch self.state {
         case .normal:
             strokeColor = .systemGray5
             foregroundColor = baseColor
-            backgroundColor = .clear
+            backgroundColor = wasHighlighted ? baseColor.withAlphaComponent(0.3) : .clear
         case [.highlighted]:
             strokeColor = .systemGray5
             foregroundColor = baseColor
@@ -60,7 +65,7 @@ final class OutlineButton: UIButton {
         default:
             strokeColor = .systemGray5
             foregroundColor = baseColor
-            backgroundColor = .clear
+            backgroundColor = wasHighlighted ? baseColor.withAlphaComponent(0.3) : .clear
         }
         
         background.strokeColor = strokeColor

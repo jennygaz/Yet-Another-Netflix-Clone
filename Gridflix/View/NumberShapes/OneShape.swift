@@ -14,27 +14,54 @@ struct OneShape: Shape {
         return Path { path in
             path.move(to: CGPoint(
                 x: rect.midX,
-                y: rect.minY + rect.height / 6.0))
+                y: rect.minY + rect.height / 6.0 + rect.height - rect.height / 6.0 * 5))
             path.addLine(to: CGPoint(
                 x: rect.midX - rect.width / 3.0,
-                y: rect.minY + rect.height / 4.0))
+                y: rect.minY + rect.height / 4.0 + rect.height - rect.height / 6.0 * 5))
             path.addLine(to: CGPoint(
                 x: rect.midX - rect.width / 3.0,
-                y: rect.minY + rect.height / 3.0))
+                y: rect.minY + rect.height / 3.0 + rect.height - rect.height / 6.0 * 5))
             path.addLine(to: CGPoint(
                 x: rect.midX - rect.width / 10.0,
-                y: m * (rect.width / 10.0) + b))
+                y: m * (rect.width / 10.0) + b + rect.height - rect.height / 6.0 * 5))
+            
             path.addLine(to: CGPoint(
                 x: rect.midX - rect.width / 10.0,
-                y: rect.minY + rect.height / 6.0 * 5))
+                y: rect.minY + rect.height))
             path.addLine(to: CGPoint(
                 x: rect.midX + rect.width / 10.0,
-                y: rect.minY + rect.height / 6.0 * 5))
+                y: rect.minY + rect.height))
             path.addLine(to: CGPoint(
                 x: rect.midX + rect.width / 10.0,
-                y: rect.minY + rect.height / 7.0))
+                y: rect.minY + rect.height / 7.0 + rect.height - rect.height / 6.0 * 5))
             path.closeSubpath()
         }
+        /*
+         return Path { path in
+             path.move(to: CGPoint(
+                 x: rect.midX,
+                 y: rect.minY + rect.height / 6.0))
+             path.addLine(to: CGPoint(
+                 x: rect.midX - rect.width / 3.0,
+                 y: rect.minY + rect.height / 4.0))
+             path.addLine(to: CGPoint(
+                 x: rect.midX - rect.width / 3.0,
+                 y: rect.minY + rect.height / 3.0))
+             path.addLine(to: CGPoint(
+                 x: rect.midX - rect.width / 10.0,
+                 y: m * (rect.width / 10.0) + b))
+             path.addLine(to: CGPoint(
+                 x: rect.midX - rect.width / 10.0,
+                 y: rect.minY + rect.height / 6.0 * 5))
+             path.addLine(to: CGPoint(
+                 x: rect.midX + rect.width / 10.0,
+                 y: rect.minY + rect.height / 6.0 * 5))
+             path.addLine(to: CGPoint(
+                 x: rect.midX + rect.width / 10.0,
+                 y: rect.minY + rect.height / 7.0))
+             path.closeSubpath()
+         }
+         */
     }
 }
 

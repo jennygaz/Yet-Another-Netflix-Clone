@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 final class ProfileCoordinator: Coordinator {
     // MARK: - Properties
     let coordinatorType: CoordinatorType = .profile

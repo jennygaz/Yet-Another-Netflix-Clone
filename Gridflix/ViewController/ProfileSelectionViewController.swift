@@ -16,9 +16,7 @@ final class ProfileSelectionViewController: UIViewController {
     private var collectionLabel: UILabel!
     private var collectionView: UICollectionView!
     private var dataSource: DataSource? {
-        didSet {
-            loadingIndicator.stopAnimating()
-        }
+        didSet { loadingIndicator.stopAnimating() }
     }
     private var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
     var coordinator: any Coordinator
@@ -67,10 +65,6 @@ final class ProfileSelectionViewController: UIViewController {
         netflixLogoView.backgroundColor = .clear
         
         self.navigationItem.titleView = netflixLogoView
-        print("Netflix Logo View is")
-        dump(netflixLogoView)
-        print("title view is")
-        dump(self.navigationController?.navigationItem.titleView)
         // Profile Edit Button
         let editIcon = UIImage(named: "custom.pencil.edit")?
             .withTintColor(.white, renderingMode: .alwaysTemplate)
@@ -178,5 +172,5 @@ extension ProfileSelectionViewController {
     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
         vc.profiles = items
     }
-    return nc
+    return vc
 }

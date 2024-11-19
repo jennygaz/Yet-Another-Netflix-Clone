@@ -27,10 +27,19 @@ final class SessionCoordinator: Coordinator {
 //        let swiftUIView = WelcomeViewUI()
 //        let welcomeVC = UIHostingController(rootView: swiftUIView)
 //        welcomeVC.navigationController?.setNavigationBarHidden(true, animated: false)
-        let welcomeVC = WelcomeViewController()
+        let homeVC = HomeViewController(with: self)
+        var items: [CompactTitle] = []
+        items.reserveCapacity(90)
+        for i in 1...90 {
+            items.append(CompactTitle(id: i, name: "Naruto Shippuden", imageURL: "naruto_hero_view"))
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            homeVC.addElements(items)
+        }
+//        let welcomeVC = WelcomeViewController()
         navigationController.viewControllers.removeAll()
         navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.pushViewController(welcomeVC, animated: true)
+        navigationController.pushViewController(homeVC, animated: true)
     }
 }
 

@@ -1,3 +1,11 @@
+//
+//  HighlightMovie.swift
+//  Gridflix
+//
+//  Created by Jenny Gallegos Cardenas on 18/10/24.
+//
+import UIKit
+
 struct HighlightMovie {
     let name: String
     let mainImage: String

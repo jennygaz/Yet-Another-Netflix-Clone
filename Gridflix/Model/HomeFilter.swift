@@ -1,5 +1,12 @@
+//
+//  HomeFilter.swift
+//  Gridflix
+//
+//  Created by Jenny Gallegos Cardenas on 18/10/24.
+//
+
 enum HomeFilter: Identifiable, CaseIterable, CustomStringConvertible {
-    static var allCases: [HomeFilter] = [.tvShows, .movies]
+    static let allCases: [HomeFilter] = [.tvShows, .movies]
 
     case tvShows
     case movies

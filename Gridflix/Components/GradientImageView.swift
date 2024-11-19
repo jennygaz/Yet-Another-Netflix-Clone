@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 public class GradientImageView: UIImageView {
     // MARK: - Properties
     private var colors: [UIColor] = [] {
@@ -53,6 +54,7 @@ public class GradientImageView: UIImageView {
 
 // MARK: - Unit Point
 public extension GradientImageView {
+    @MainActor
     enum UnitPoint {
         case top
         case bottom
@@ -120,6 +122,13 @@ public extension GradientImageView {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = overlayView.frame
+    }
+}
+
+public extension GradientImageView {
+    func setCornerRadius(_ radius: CGFloat) {
+        gradientLayer.cornerRadius = radius
+        layer.cornerRadius = radius
     }
 }
 

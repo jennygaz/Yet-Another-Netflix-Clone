@@ -6,6 +6,7 @@
 //
 import UIKit
 
+@MainActor
 protocol Coordinator: AnyObject {
     var coordinatorType: CoordinatorType { get }
     var navigationController: UINavigationController { get set }

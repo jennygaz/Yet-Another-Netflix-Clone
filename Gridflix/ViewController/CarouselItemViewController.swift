@@ -25,12 +25,12 @@ class CarouselItemViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = CarouselItemView(frame: self.view.frame, imageName: photo, text: text)
+//        view = CarouselItemView(frame: self.view.frame, imageName: photo, text: text)
     }
 }
 
 @available(iOS 17, *)
 #Preview("Carousel Item VC") {
-    let vc = UIViewController()
+    let vc = CarouselItemViewController(photo: "naruto_hero_view", text: "Naruto Shippuden")
     return vc
 }

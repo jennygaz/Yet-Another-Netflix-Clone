@@ -1,3 +1,11 @@
+//
+//  FilterButton.swift
+//  Gridflix
+//
+//  Created by Jenny Gallegos Cardenas on 18/10/24.
+//
+import SwiftUI
+
 struct FilterButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

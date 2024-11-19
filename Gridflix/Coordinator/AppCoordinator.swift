@@ -48,6 +48,7 @@ final class AppCoordinator: Coordinator {
     }
 
     private func startMainFlow() {
+        startSessionFlow() // TODO: - Remove
         guard dependencyRepository.sessionRepository.hasActiveSession else {
             startSessionFlow()
             return

@@ -1,19 +1,27 @@
+//
+//  OrthogonalCollectionViewController.swift
+//  Gridflix
+//
+//  Created by Jenny Gallegos Cardenas on 04/11/24.
+//
+import UIKit
+
 @MainActor
 final class OrthogonalCollectionViewController<SectionType: Hashable & Sendable, DataType: Hashable & Sendable>: UIViewController {
     // MARK: - Typealias
-    private typealias DataSource = UICollectionViewDiffableDataSource<SectionType, DataType>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<SectionType, DataType>
+    typealias DataSource = UICollectionViewDiffableDataSource<SectionType, DataType>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<SectionType, DataType>
 
     // MARK: - Properties
-    private var dataSource: DataSource?
-    private var collectionView: UICollectionView?
-    private var elements: [String: [String]] = [:]
+    var dataSource: DataSource?
+    var collectionView: UICollectionView?
+    private var elements: [String: Set<String>] = [:]
 
-    private var totalNumberOfSections: Int {
+    var totalNumberOfSections: Int {
         elements.keys.count
     }
 
-    private var numberOfItemsPerSection: Int {
+    var numberOfItemsPerSection: Int {
         30
     }
 
@@ -44,13 +52,14 @@ extension OrthogonalCollectionViewController {
         
         dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselItemView.identifier, for: indexPath) as? CarouselItemView else { return UICollectionViewCell() }
-            cell.configure(with: CarouselModel()) // TODO: - Fix the configure part with a Cell used for both games and movies, add styles!
+//            cell.configure(with: CarouselModel()) // TODO: - Fix the configure part with a Cell used for both games and movies, add styles!
             return cell
         }
         dataSource?.supplementaryViewProvider = { collectionView, sectionIdentifier, sectionIndex in
             guard sectionIndex.row == 0 else {
                 // TODO: - Change the title according to the sectionIndex
-                let header = SectionTitleHeaderView(title: sectionIdentifier)
+                let header = SectionTitleHeaderView()
+                header.configure(with: sectionIdentifier)
                 return header
             }
             let header = HomeHeaderView()
@@ -85,4 +94,10 @@ extension OrthogonalCollectionViewController {
 
         return layout
     }
+}
+
+struct OrthogonalCollectionElementKind {
+    static let sectionBanner = "section-banner-element-kind"
+    static let sectionHeader = "section-header-element-kind"
+    static let layoutHeader  = "layout-header-element-kind"
 }

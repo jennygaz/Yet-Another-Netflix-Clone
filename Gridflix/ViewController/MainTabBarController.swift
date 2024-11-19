@@ -52,7 +52,6 @@ enum TabItem: CaseIterable {
         switch self {
         case .home, .games, .news: return .system
         case .profile: return .custom
-        default: return .custom
         }
     }
     
