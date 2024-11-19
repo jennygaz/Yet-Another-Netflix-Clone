@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		178947372CA381ED00598BE3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 178947362CA381ED00598BE3 /* Lottie */; };
 		17BAC0A72CC2DB1E0078F69D /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = 17BAC0A62CC2DB1E0078F69D /* Perception */; };
+		17C0B5B42CED0CF600A04AC5 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = 17C0B5B32CED0CF600A04AC5 /* TODO.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		17A844032C936DAF008721D5 /* Gridflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gridflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A844192C936DB0008721D5 /* GridflixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridflixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A844232C936DB0008721D5 /* GridflixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridflixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17C0B5B32CED0CF600A04AC5 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -95,6 +97,7 @@
 		17A843FA2C936DAF008721D5 = {
 			isa = PBXGroup;
 			children = (
+				17C0B5B32CED0CF600A04AC5 /* TODO.md */,
 				17A844052C936DAF008721D5 /* Gridflix */,
 				17A8441C2C936DB0008721D5 /* GridflixTests */,
 				17A844262C936DB0008721D5 /* GridflixUITests */,
@@ -238,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17C0B5B42CED0CF600A04AC5 /* TODO.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
