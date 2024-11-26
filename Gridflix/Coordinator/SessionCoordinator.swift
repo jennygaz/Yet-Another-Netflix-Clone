@@ -7,6 +7,7 @@
 import UIKit
 import SwiftUI
 
+@MainActor
 final class SessionCoordinator: Coordinator {
     // MARK: - Properties
     let coordinatorType: CoordinatorType = .session
@@ -23,23 +24,22 @@ final class SessionCoordinator: Coordinator {
         self.finishDelegate = finishDelegate
     }
 
+    // MARK: - Public Methods
     func start() {
-//        let swiftUIView = WelcomeViewUI()
-//        let welcomeVC = UIHostingController(rootView: swiftUIView)
-//        welcomeVC.navigationController?.setNavigationBarHidden(true, animated: false)
-        let homeVC = HomeViewController(with: self)
-        var items: [CompactTitle] = []
-        items.reserveCapacity(90)
-        for i in 1...90 {
-            items.append(CompactTitle(id: i, name: "Naruto Shippuden", imageURL: "naruto_hero_view"))
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            homeVC.addElements(items)
-        }
-//        let welcomeVC = WelcomeViewController()
+        let welcomeVC = WelcomeViewController()
+        welcomeVC.navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController.viewControllers.removeAll()
         navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.pushViewController(homeVC, animated: true)
+        navigationController.pushViewController(welcomeVC, animated: true)
+    }
+
+    // MARK: - Private Methods
+    private func startSignInFlow() {
+        
+    }
+
+    private func startOnboardingFlow() {
+        
     }
 }
 
@@ -47,9 +47,10 @@ extension SessionCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(child: any Coordinator) {
         childCoordinators = childCoordinators.filter { $0.coordinatorType != child.coordinatorType }
         switch child.coordinatorType {
-        case .app, .launch, .tab, .profile, .player, .session:
+        // TODO: - Handle Sign In case
+        case .sign:
             break
-        case .onboarding:
+        default:
             break
         }
     }

@@ -11,7 +11,7 @@ protocol Diffable: AnyObject {
 }
 
 @MainActor
-final class OrthogonalCollectionViewController<SectionType: Hashable & Sendable, DataType: Hashable & Sendable>: UIViewController, UICollectionViewDelegate {
+final class OrthogonalCollectionViewController<SectionType: Hashable & Sendable, DataType: Hashable & Sendable & CarouselTitle>: UIViewController, UICollectionViewDelegate {
     // MARK: - Typealias
     typealias DataSource = UICollectionViewDiffableDataSource<SectionType, DataType>
     typealias Snapshot = NSDiffableDataSourceSnapshot<SectionType, DataType>
@@ -22,7 +22,7 @@ final class OrthogonalCollectionViewController<SectionType: Hashable & Sendable,
     var coordinator: any Coordinator
     private var sections: [HomeSection] = []
     private var elements: [HomeSection: Set<SectionType>] = [:]
-    private var models: [SectionType] = []
+    private var models: [DataType] = []
 
     var numberOfItemsPerSection: Int { 30 }
 
@@ -51,7 +51,7 @@ extension OrthogonalCollectionViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(HomeHeaderView.self, forSupplementaryViewOfKind: OrthogonalCollectionElementKind.layoutHeader, withReuseIdentifier: HomeHeaderView.identifier)
         collectionView.register(SectionTitleHeaderView.self, forSupplementaryViewOfKind: OrthogonalCollectionElementKind.sectionHeader, withReuseIdentifier: SectionTitleHeaderView.identifier)
-        collectionView.register(CarouselItemView.self, forCellWithReuseIdentifier: CarouselItemView.identifier)
+        collectionView.register(DefaultTitleCell.self, forCellWithReuseIdentifier: DefaultTitleCell.identifier)
         collectionView.backgroundColor = .black
         // TODO: - Add Ranked Title Cells
         // TODO: - Add Spotlight Title Cells
@@ -64,10 +64,10 @@ extension OrthogonalCollectionViewController {
     private func configureDataSource() {
         guard let collectionView else { return }
         
-        dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselItemView.identifier, for: indexPath) as? CarouselItemView else { return UICollectionViewCell() }
-            // TODO: - Add generic configure
-//            cell.configure(with: models[indexPath.row])
+        dataSource = DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
+            guard let models = self?.models else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultTitleCell.identifier, for: indexPath) as? DefaultTitleCell else { return UICollectionViewCell() }
+            cell.configure(with: models[indexPath.row])
             return cell
         }
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, sectionIdentifier, sectionIndex in

@@ -7,6 +7,7 @@
 import UIKit
 import SwiftUI
 
+/// Handle the interactions between starting a new ``Coordinator`` and finishing another
 final class AppCoordinator: Coordinator {
     // MARK: - Properties
     let coordinatorType: CoordinatorType = .app
@@ -48,7 +49,6 @@ final class AppCoordinator: Coordinator {
     }
 
     private func startMainFlow() {
-        startSessionFlow() // TODO: - Remove
         guard dependencyRepository.sessionRepository.hasActiveSession else {
             startSessionFlow()
             return
@@ -93,7 +93,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
             startTabFlow()
         case .session:
             startMainFlow()
-        case .onboarding, .player, .app: // App doesn't handle these cases
+        default: // AppCoordinator doesn't handle other cases
             break
         }
     }

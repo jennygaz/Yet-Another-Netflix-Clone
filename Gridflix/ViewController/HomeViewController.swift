@@ -163,8 +163,8 @@ final class HomeViewController: UIViewController {
         guard let collectionView else { return }
 
         dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselItemView.identifier, for: indexPath) as? CarouselItemView else { return UICollectionViewCell() }
-            cell.configure(with: CarouselModel(imageName: itemIdentifier.imageURL, text: itemIdentifier.name))
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultTitleCell.identifier, for: indexPath) as? DefaultTitleCell else { return UICollectionViewCell() }
+//            cell.configure(with: CarouselModel(imageName: itemIdentifier.imageURL, text: itemIdentifier.name))
             return cell
         }
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, sectionIdentifier, sectionIndex in
@@ -215,7 +215,7 @@ final class HomeViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(HomeHeaderView.self, forSupplementaryViewOfKind: OrthogonalCollectionElementKind.layoutHeader, withReuseIdentifier: HomeHeaderView.identifier)
         collectionView.register(SectionTitleHeaderView.self, forSupplementaryViewOfKind: OrthogonalCollectionElementKind.sectionHeader, withReuseIdentifier: SectionTitleHeaderView.identifier)
-        collectionView.register(CarouselItemView.self, forCellWithReuseIdentifier: CarouselItemView.identifier)
+        collectionView.register(DefaultTitleCell.self, forCellWithReuseIdentifier: DefaultTitleCell.identifier)
         collectionView.backgroundColor = .black
         // TODO: - Register Collection View Cell and Collection View Section Headers
         view.addSubview(collectionView)

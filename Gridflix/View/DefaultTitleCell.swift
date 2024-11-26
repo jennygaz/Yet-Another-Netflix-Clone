@@ -7,19 +7,13 @@
 
 import UIKit
 
-struct CarouselModel {
-    let imageName: String
-    let text: String
-}
-
-final class CarouselItemView: UICollectionViewCell {
-    static let identifier: String = "CarouselItemView"
+final class DefaultTitleCell: UICollectionViewCell {
+    static let identifier: String = "DefaultTitleCell"
     // MARK: - Properties
-    private var model: CarouselModel = .init(imageName: "naruto_hero_view", text: "Naruto Shippuden")
+    private var model: CarouselTitle?
 
     lazy var imageView: UIImageView = {
-        let image = UIImage(named: model.imageName)
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
@@ -30,7 +24,6 @@ final class CarouselItemView: UICollectionViewCell {
         let textView = UITextView()
         textView.textContainer.maximumNumberOfLines = 3
         textView.font = .preferredFont(forTextStyle: .title2)
-        textView.text = model.text
         textView.textColor = .white
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
@@ -54,12 +47,12 @@ final class CarouselItemView: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.model = CarouselModel(imageName: "naruto_hero_view", text: "Naruto Shippuden")
         configureLayout()
     }
 
     // MARK: - Public Methods
-    public func configure(with model: CarouselModel) {
+    public func configure(with model: any CarouselTitle) {
+        self.model = model
         let image = UIImage(named: model.imageName)
         imageView.image = image
         descriptionLabel.text = model.text
@@ -85,11 +78,21 @@ final class CarouselItemView: UICollectionViewCell {
     }
 }
 
+#if DEBUG
+
+struct MockCarouselTitle: CarouselTitle {
+    var name: String { "Naruto Shippuden" }
+    var imageName: String { "naruto_hero_view" }
+    var text: String { "Naruto Shippuden" }
+}
+
 @available(iOS 17, *)
 #Preview {
     let vc = UIViewController()
-    let cell = CarouselItemView(frame: vc.view?.frame ?? .zero)
+    let cell = DefaultTitleCell(frame: vc.view?.frame ?? .zero)
     vc.view = cell
-    cell.configure(with: CarouselModel(imageName: "naruto_hero_view", text: "Naruto Shippuden"))
+    let model = MockCarouselTitle()
+    cell.configure(with: model)
     return vc
 }
+#endif

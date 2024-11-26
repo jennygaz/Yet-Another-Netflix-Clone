@@ -22,7 +22,6 @@ final class ProfileCoordinator: Coordinator {
     ) {
         self.navigationController = navigationController
         self.finishDelegate = finishDelegate
-//        configureNavBar()
     }
 
     // MARK: - Public Methods
@@ -53,10 +52,6 @@ final class ProfileCoordinator: Coordinator {
         netflixLogoView.contentMode = .scaleAspectFit
         
         navigationController.navigationItem.titleView = netflixLogoView
-        print("Netflix Logo View is")
-        dump(netflixLogoView)
-        print("title view is")
-        dump(navigationController.navigationItem.titleView)
         // Profile Edit Button
         let editIcon = UIImage(systemName: "highlighter")
         let editProfilesButton = UIBarButtonItem(
@@ -68,12 +63,6 @@ final class ProfileCoordinator: Coordinator {
         navigationController.navigationItem.setRightBarButton(editProfilesButton, animated: true)
 //        navigationController.navigationItem.rightBarButtonItem = editProfilesButton
         navigationController.setNavigationBarHidden(false, animated: true)
-        print("Edit button is")
-        dump(editProfilesButton)
-        print("right bar button is")
-        dump(navigationController.navigationItem.rightBarButtonItem)
-//        navigationController.navigationItem.setRightBarButton(editProfilesButton, animated: true)
-        print("is hidden?", navigationController.isNavigationBarHidden)
     }
 }
 

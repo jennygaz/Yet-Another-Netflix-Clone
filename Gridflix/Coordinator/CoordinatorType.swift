@@ -13,4 +13,5 @@ enum CoordinatorType {
     case onboarding
     case player
     case session
+    case sign
 }
