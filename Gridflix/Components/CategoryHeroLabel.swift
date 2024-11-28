@@ -26,6 +26,7 @@ final class CategoryHeroLabel: UILabel {
 
     func configureLabel() {
         self.font = .preferredFont(forTextStyle: .caption2)
+        self.adjustsFontSizeToFitWidth = true
         self.textColor = .white
         self.textAlignment = .center
         sizeToFit()

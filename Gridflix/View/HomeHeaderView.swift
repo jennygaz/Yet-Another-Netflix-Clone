@@ -7,20 +7,12 @@
 
 import UIKit
 
+// TODO: - Add a delegate that allows for interactions
 class HomeHeaderView: UICollectionReusableView {
     // MARK: - Identifier
     static let identifier = "HomeHeaderView"
 
     // MARK: - Properties
-    var model: HighlightMovie = .default {
-        didSet {
-            guard oldValue.categories != model.categories else {
-                return
-            }
-            configure(with: model)
-        }
-    }
-
     var state: HomeFilter? {
         didSet { updateFilters() }
     }
@@ -115,6 +107,7 @@ class HomeHeaderView: UICollectionReusableView {
         return imageView
     }()
 
+    // TODO: - Verify if this one is needed
     private lazy var heroLogoView: UIImageView = {
         let image = UIImage(named: "naruto_logo") // State
         let imageView = UIImageView(image: image)
@@ -158,9 +151,10 @@ class HomeHeaderView: UICollectionReusableView {
         return button
     }()
 
+    // TODO: Add State here for using the proper icon
     private lazy var myListButton: UIButton = {
         var config = UIButton.Configuration.bordered()
-        let icon = UIImage(systemName: model.isListed ? "checkmark" : "plus") // TODO: Add State here for using the proper icon
+        let icon = UIImage(systemName: Bool.random() ? "checkmark" : "plus")
         config.title = "My List"
         config.image = icon
         config.imagePlacement = .leading
@@ -204,21 +198,21 @@ class HomeHeaderView: UICollectionReusableView {
         bringSubviewToFront(topContainer)
         
         applyConstraints()
-        configureBannerCategories(with: model.categories)
+        // TODO: - Add a way to inject categories
+        configureBannerCategories(with: ["Hero's Journey", "Action", "Tragicomedy", "Ninja", "Anime"])
         addActions()
     }
 
-    public func configure(with model: HighlightMovie) {
-        guard let mainImage = UIImage(named: model.mainImage),
-              let logo = UIImage(named: model.logo)
+    // TODO: - Update state management
+    public func configure(with model: Title) {
+        guard let mainImage = UIImage(named: model.posterURL)
         else { return }
         // TODO: - Set image asynchronously
         heroImageView.image = mainImage
-        heroLogoView.image = logo
-        let listIcon = UIImage(systemName: model.isListed ? "checkmark" : "plus")
+        let listIcon = UIImage(systemName: Bool.random() ? "checkmark" : "plus")
         myListButton.configuration?.image = listIcon
-        backgroundColor = model.backgroundColor
-        configureBannerCategories(with: model.categories)
+        backgroundColor = .black.withAlphaComponent(0.8)
+//        configureBannerCategories(with: model.categories)
     }
 
     public func configureBannerCategories(with categories: [String]) {
@@ -361,14 +355,14 @@ extension HomeHeaderView {
 extension HomeHeaderView {
     @objc
     private func playAction() {
-        print("Now playing \(model.name)")
+        print("Now playing")
     }
 
     @objc
     private func myListAction() {
         UIView.animate(withDuration: 0.2) { [unowned self] in
-            model.isListed.toggle()
-            let icon = UIImage(systemName: model.isListed ? "checkmark" : "plus")
+//            model.isListed.toggle()
+            let icon = UIImage(systemName: Bool.random() ? "checkmark" : "plus")
             myListButton.setImage(icon, for: .normal)
         }
     }
@@ -410,7 +404,7 @@ extension HomeHeaderView {
 
     @objc
     private func didSelectImage() {
-        print("Movie \(model.name) selected")
+        print("Movie selected")
     }
 }
 
@@ -418,20 +412,6 @@ extension HomeHeaderView {
 #Preview("Home Header") {
     let vc = UIViewController()
     let homeView = HomeHeaderView(frame: vc.view.bounds)
-    let model = HighlightMovie(
-        name: "Naruto Shippuden",
-        mainImage: "naruto_hero_view",
-        logo: "naruto_logo",
-        categories: [
-            "Ninja",
-            "Slow Pace",
-            "Fighting",
-            "Edgy",
-            "Dark"
-        ],
-        isListed: true,
-        backgroundColor: .black.withAlphaComponent(0.8))
-    homeView.model = model
     vc.view = homeView
     return vc
 }

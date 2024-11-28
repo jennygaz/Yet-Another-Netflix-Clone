@@ -10,8 +10,6 @@ import UIKit
 final class DefaultTitleCell: UICollectionViewCell {
     static let identifier: String = "DefaultTitleCell"
     // MARK: - Properties
-    private var model: CarouselTitle?
-
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -51,17 +49,16 @@ final class DefaultTitleCell: UICollectionViewCell {
     }
 
     // MARK: - Public Methods
-    public func configure(with model: any CarouselTitle) {
-        self.model = model
-        let image = UIImage(named: model.imageName)
+    public func configure(with model: Title) {
+        let image = UIImage(named: model.posterURL)
         imageView.image = image
-        descriptionLabel.text = model.text
+        descriptionLabel.text = model.description
     }
 
     // MARK: - Private Methods
     private func configureLayout() {
         addSubview(imageView)
-        imageView.addSubview(gradientMask)
+//        imageView.addSubview(gradientMask)
         addSubview(descriptionLabel)
 
         // Constraints
@@ -80,7 +77,7 @@ final class DefaultTitleCell: UICollectionViewCell {
 
 #if DEBUG
 
-struct MockCarouselTitle: CarouselTitle {
+struct MockCarouselTitle {
     var name: String { "Naruto Shippuden" }
     var imageName: String { "naruto_hero_view" }
     var text: String { "Naruto Shippuden" }
@@ -91,7 +88,7 @@ struct MockCarouselTitle: CarouselTitle {
     let vc = UIViewController()
     let cell = DefaultTitleCell(frame: vc.view?.frame ?? .zero)
     vc.view = cell
-    let model = MockCarouselTitle()
+    let model = Title(id: 1, mediaType: "TV Series", name: "Naruto Shippuden", title: "Naruto Shippuden", posterURL: "naruto_hero_view", description: "", voteCount: 1, voteAverage: 1.0, releaseDate: .now)
     cell.configure(with: model)
     return vc
 }

@@ -39,44 +39,31 @@ enum HomeSection: String, Hashable, Codable {
 enum TitleCategory: String, Codable {
     case comedy
 }
-struct Title: Hashable, Codable {
-    let id: Int
-    let name: String
-    var categories: [TitleCategory]
-    var sections: [HomeSection]
-    let imageURL: String
-    let releaseDate: Date
-}
 
-struct CompactTitle: Hashable, Codable {
-    let id: Int
-    let name: String
-    let imageURL: String
-}
-
+@MainActor
 final class HomeViewController: UIViewController {
     // MARK: - Types
-    private typealias DataSource = UICollectionViewDiffableDataSource<HomeSection, CompactTitle>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, CompactTitle>
+    private typealias DataSource = UICollectionViewDiffableDataSource<HomeSection, Title>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<HomeSection, Title>
     
     // MARK: - Properties
     private var collectionView: UICollectionView?
     private var dataSource: DataSource?
     private var sections: [HomeSection] = []
-    private var elements: [HomeSection: Set<CompactTitle>] = [:]
+    private var elements: [[Title]] = []
+    private var highlighted: Title = .placeholder
     var coordinator: any Coordinator
-    var titles: [Title] = []
-    var numberOfItemsPerSection: Int {
-        30
-    }
+    var numberOfItemsPerSection: Int { 30 }
 
     // MARK: - Lifecycle
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(with coordinator: any Coordinator) {
+    init(with coordinator: any Coordinator, baseSections sections: [HomeSection] = [], baseElements elements: [[Title]] = []) {
         self.coordinator = coordinator
+        self.sections = sections
+        self.elements = elements
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -84,31 +71,86 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureNavBar()
         configureHierarchy()
-        setupCollectionView()
         setupDataSource()
         guard let dataSource else { return }
-        sections = [.banner, .action, .anime, .awardWinningShows]
         var snapshot = dataSource.snapshot()
-        snapshot.appendSections(sections)
+        snapshot.appendSections([.banner] + sections)
+        if !elements.isEmpty {
+            for (section, elementList) in zip(sections, elements) {
+                snapshot.appendItems(elementList, toSection: section)
+            }
+        }
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 
     // MARK: - Public Methods
-    func addElements(_ items: [CompactTitle]) {
-        guard let dataSource else { return }
-        print("wahoo!")
+    // MARK: - Diffing & Public Interaction
+    public func addItems(_ items: [Title], toSection section: HomeSection) {
+        guard let dataSource, section != .banner else { return }
         var snapshot = dataSource.snapshot()
-        let pairs = [(HomeSection.action, items.dropLast(60)), (HomeSection.anime, items.dropFirst(30).dropLast(30)), (HomeSection.awardWinningShows,items.dropFirst(60))]
-        for pair in pairs {
-            if !elements.keys.contains(pair.0) {
-                elements[pair.0] = Set()
-            }
-            elements[pair.0]?.formUnion(pair.1)
-            snapshot.appendItems(Array(pair.1), toSection: pair.0)
+        let uniqueItems = Set(items)
+        guard let sectionIndex = sections.firstIndex(of: section) else {
+            sections.append(section)
+            elements.append(Array(uniqueItems))
+            snapshot.appendSections([section])
+            snapshot.appendItems(Array(uniqueItems), toSection: section)
+            dataSource.apply(snapshot, animatingDifferences: true)
+            return
+        }
+
+        let uniqueItemsToAppend = uniqueItems
+            .subtracting(Set(elements[sectionIndex]))
+            .map { $0 }
+        elements[sectionIndex].append(contentsOf: uniqueItemsToAppend)
+        snapshot.appendItems(uniqueItemsToAppend, toSection: section)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+
+    public func removeItems(_ items: [Title], fromSection section: HomeSection) {
+        guard let dataSource, section != .banner,
+              let sectionIndex = sections.firstIndex(of: section)
+        else { return }
+        var snapshot: Snapshot = dataSource.snapshot()
+        let uniqueItems = Set(items).intersection(elements[sectionIndex])
+        snapshot.deleteItems(Array(uniqueItems))
+        elements[sectionIndex].removeAll(where: { uniqueItems.contains($0) })
+        if elements[sectionIndex].isEmpty {
+            snapshot.deleteSections([section])
+            elements.remove(at: sectionIndex)
         }
         dataSource.apply(snapshot, animatingDifferences: true)
     }
-    
+
+    public func removeAllItems(fromSection section: HomeSection) {
+        guard let dataSource, section != .banner,
+              let sectionIndex = sections.firstIndex(of: section)
+        else { return }
+        var snapshot: Snapshot = dataSource.snapshot()
+        sections.remove(at: sectionIndex)
+        elements.remove(at: sectionIndex)
+        snapshot.deleteSections([section])
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+
+    public func updateItems(_ items: [Title], atSection section: HomeSection) {
+        guard let dataSource, section != .banner,
+              let sectionIndex = sections.firstIndex(of: section)
+        else { return }
+        var snapshot: Snapshot = dataSource.snapshot()
+        let uniqueItems = Array(Set(items))
+        let itemsToReplace = elements[sectionIndex]
+        snapshot.deleteItems(itemsToReplace)
+        snapshot.appendItems(uniqueItems, toSection: section)
+        elements[sectionIndex] = uniqueItems
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+
+    public func makeRandomHighlightedTitle() {
+        guard let newTitle = elements.flatMap({ $0 }).randomElement() else { return }
+        self.highlighted = newTitle
+    }
+
+    // TODO: - Add public methods to add badges
     // MARK: - Private Methods
     private func configureNavBar() {
         let navigationTintColor = UIColor.white.withAlphaComponent(0.75)
@@ -155,21 +197,18 @@ final class HomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    private func setupCollectionView() {
-        
-    }
-    
     private func setupDataSource() {
         guard let collectionView else { return }
 
-        dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+        dataSource = DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultTitleCell.identifier, for: indexPath) as? DefaultTitleCell else { return UICollectionViewCell() }
-//            cell.configure(with: CarouselModel(imageName: itemIdentifier.imageURL, text: itemIdentifier.name))
+            let sectionIndex = indexPath.section
+            guard let elements = self?.elements else { return UICollectionViewCell() }
+            cell.configure(with: elements[sectionIndex - 1][indexPath.row])
             return cell
         }
+
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, sectionIdentifier, sectionIndex in
-            print("section identifier was \(sectionIdentifier)")
-            print("section index was \(sectionIndex) - data source")
             switch sectionIdentifier {
             case OrthogonalCollectionElementKind.layoutHeader:
                 guard let header = collectionView.dequeueReusableSupplementaryView(
@@ -178,20 +217,9 @@ final class HomeViewController: UIViewController {
                     for: sectionIndex) as? HomeHeaderView
                 else { return UICollectionReusableView() }
                 // TODO: - Add a source to get the highlighted titles :)
-                let mockModel = HighlightMovie(
-                    name: "Naruto Shippuden",
-                    mainImage: "naruto_hero_view",
-                    logo: "naruto_logo",
-                    categories: [
-                        "Ninja",
-                        "Slow Pace",
-                        "Fighting",
-                        "Edgy",
-                        "Dark"
-                    ],
-                    isListed: true,
-                    backgroundColor: .black.withAlphaComponent(0.8))
-                header.configure(with: mockModel)
+                // TODO: - Get the highlighted title quickly
+                guard let self else { return UICollectionReusableView() }
+                header.configure(with: self.highlighted)
                 return header
             case OrthogonalCollectionElementKind.sectionHeader:
                 guard let header = collectionView.dequeueReusableSupplementaryView(
@@ -200,7 +228,7 @@ final class HomeViewController: UIViewController {
                     for: sectionIndex) as? SectionTitleHeaderView
                 else { return UICollectionReusableView() }
                 guard let sections = self?.sections else { return header }
-                header.configure(with: sections[sectionIndex.section].rawValue)
+                header.configure(with: sections[sectionIndex.section - 1].rawValue)
                 return header
             default:
                 return UICollectionReusableView()
@@ -217,9 +245,11 @@ final class HomeViewController: UIViewController {
         collectionView.register(SectionTitleHeaderView.self, forSupplementaryViewOfKind: OrthogonalCollectionElementKind.sectionHeader, withReuseIdentifier: SectionTitleHeaderView.identifier)
         collectionView.register(DefaultTitleCell.self, forCellWithReuseIdentifier: DefaultTitleCell.identifier)
         collectionView.backgroundColor = .black
-        // TODO: - Register Collection View Cell and Collection View Section Headers
+        // TODO: - Add Ranked Title Cells
+        // TODO: - Add Spotlight Title Cells
         view.addSubview(collectionView)
         collectionView.delegate = self
+        // TODO: - Set up the delegate if needed
         self.collectionView = collectionView
     }
 
@@ -242,7 +272,6 @@ final class HomeViewController: UIViewController {
             } else {
                 group = .horizontal(layoutSize: groupSize, subitem: repeatingItem, count: 3)
             }
-            // TODO: - Ensure the Banner is always Section Index 0, add a mechanism to handle it
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
             section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
@@ -261,7 +290,7 @@ final class HomeViewController: UIViewController {
                 alignment: .top)
             section.boundarySupplementaryItems = [sectionHeader]
             return section
-        }, configuration: configuration) // TODO: - Update the configuration
+        }, configuration: configuration)
 
         return layout
     }
@@ -273,16 +302,19 @@ extension HomeViewController: UICollectionViewDelegate {
 
 @available(iOS 17, *)
 #Preview("Home View Controller") {
-    var items: [CompactTitle] = []
-    items.reserveCapacity(90)
-    for i in 1...90 {
-        items.append(CompactTitle(id: i, name: "Naruto Shippuden", imageURL: "naruto_hero_view"))
+    var items = (1...90).map {
+        Title(id: $0, mediaType: "TV Series", name: "Naruto Shippuden", title: "Naruto Shippuden", posterURL: "naruto_hero_view", description: "The journey of a ninja starts now!", voteCount: 29013, voteAverage: 12.3, releaseDate: .now)
     }
-    let nc = UINavigationController()
-    let launchCoordinator = LaunchCoordinator(navigationController: nc)
-    let vc = HomeViewController(with: launchCoordinator)
+    let coordinator = PreviewCoordinator()
+    let vc = HomeViewController(with: coordinator)
     DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-        vc.addElements(items)
+        vc.addItems(Array(items[0..<30]), toSection: .exciting)
+    }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+        vc.addItems(Array(items[30..<60]), toSection: .funnyTVAllAges)
+    }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 14) {
+        vc.addItems(Array(items[60...]), toSection: .comedy)
     }
     return vc
 }

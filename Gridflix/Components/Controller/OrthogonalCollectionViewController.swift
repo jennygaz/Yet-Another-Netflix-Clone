@@ -4,6 +4,7 @@
 //
 //  Created by Jenny Gallegos Cardenas on 04/11/24.
 //
+/*
 import UIKit
 
 protocol Diffable: AnyObject {
@@ -11,7 +12,7 @@ protocol Diffable: AnyObject {
 }
 
 @MainActor
-final class OrthogonalCollectionViewController<SectionType: Hashable & Sendable, DataType: Hashable & Sendable & CarouselTitle>: UIViewController, UICollectionViewDelegate {
+final class OrthogonalCollectionViewController<SectionType: Hashable & Sendable & CustomStringConvertible, DataType: Hashable & Sendable & CarouselTitle>: UIViewController, UICollectionViewDelegate {
     // MARK: - Typealias
     typealias DataSource = UICollectionViewDiffableDataSource<SectionType, DataType>
     typealias Snapshot = NSDiffableDataSourceSnapshot<SectionType, DataType>
@@ -20,9 +21,9 @@ final class OrthogonalCollectionViewController<SectionType: Hashable & Sendable,
     var dataSource: DataSource?
     var collectionView: UICollectionView?
     var coordinator: any Coordinator
-    private var sections: [HomeSection] = []
-    private var elements: [HomeSection: Set<SectionType>] = [:]
-    private var models: [DataType] = []
+    private var highlighted: [DataType] = []
+    private var sections: [SectionType] = []
+    private var elements: [[DataType]] = []
 
     var numberOfItemsPerSection: Int { 30 }
 
@@ -43,6 +44,7 @@ final class OrthogonalCollectionViewController<SectionType: Hashable & Sendable,
     }
 }
 
+// MARK: - Inner CollectionView
 extension OrthogonalCollectionViewController {
     private func configureHierarchy() {
         let layout = createLayout()
@@ -63,13 +65,16 @@ extension OrthogonalCollectionViewController {
 
     private func configureDataSource() {
         guard let collectionView else { return }
-        
+
         dataSource = DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
-            guard let models = self?.models else { return UICollectionViewCell() }
+            guard let elements = self?.elements else { return UICollectionViewCell() }
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultTitleCell.identifier, for: indexPath) as? DefaultTitleCell else { return UICollectionViewCell() }
-            cell.configure(with: models[indexPath.row])
+            let section = indexPath.section
+            let index = indexPath.row
+            cell.configure(with: elements[section][index])
             return cell
         }
+
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, sectionIdentifier, sectionIndex in
             switch sectionIdentifier {
             case OrthogonalCollectionElementKind.layoutHeader:
@@ -88,7 +93,7 @@ extension OrthogonalCollectionViewController {
                     for: sectionIndex) as? SectionTitleHeaderView
                 else { return UICollectionReusableView() }
                 guard let sections = self?.sections else { return header }
-                header.configure(with: sections[sectionIndex.section].rawValue)
+                header.configure(with: sections[sectionIndex.section].description)
                 return header
             default:
                 return UICollectionReusableView()
@@ -115,7 +120,6 @@ extension OrthogonalCollectionViewController {
             } else {
                 group = .horizontal(layoutSize: groupSize, subitem: repeatingItem, count: 3)
             }
-            // TODO: - Ensure the Banner is always Section Index 0, add a mechanism to handle it
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
             section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
@@ -134,13 +138,9 @@ extension OrthogonalCollectionViewController {
                 alignment: .top)
             section.boundarySupplementaryItems = [sectionHeader]
             return section
-        }, configuration: configuration) // TODO: - Update the configuration
+        }, configuration: configuration)
 
         return layout
     }
 }
-
-struct OrthogonalCollectionElementKind {
-    static let sectionHeader = "section-header-element-kind"
-    static let layoutHeader  = "layout-header-element-kind"
-}
+*/
