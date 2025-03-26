@@ -1,18 +1,14 @@
-//
-//  WelcomeViewController.swift
-//  Gridflix
-//
-//  Created by Jenny Gallegos Cardenas on 25/09/24.
-//
-
 import UIKit
 import SwiftUI
 
 final class WelcomeViewController: UIViewController {
+    var presenter: WelcomeViewPresenter?
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
+        presenter?.loadWelcomeData()
     }
 
     override func loadView() {

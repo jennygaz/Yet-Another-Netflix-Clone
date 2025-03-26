@@ -1,10 +1,3 @@
-//
-//  HomeViewController.swift
-//  Gridflix
-//
-//  Created by Jenny Gallegos Cardenas on 11/10/24.
-//
-
 import UIKit
 
 enum HomeSection: String, Hashable, Codable {
@@ -54,6 +47,7 @@ final class HomeViewController: UIViewController {
     private var highlighted: Title = .placeholder
     var coordinator: any Coordinator
     var numberOfItemsPerSection: Int { 30 }
+    var presenter: HomeViewPresenter?
 
     // MARK: - Lifecycle
     required init?(coder: NSCoder) {
@@ -72,6 +66,7 @@ final class HomeViewController: UIViewController {
         configureNavBar()
         configureHierarchy()
         setupDataSource()
+        presenter?.loadHomeData()
         guard let dataSource else { return }
         var snapshot = dataSource.snapshot()
         snapshot.appendSections([.banner] + sections)

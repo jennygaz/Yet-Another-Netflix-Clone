@@ -1,9 +1,3 @@
-//
-//  SessionCoordinator.swift
-//  Gridflix
-//
-//  Created by Jenny Gallegos Cardenas on 24/09/24.
-//
 import UIKit
 import SwiftUI
 
@@ -26,20 +20,30 @@ final class SessionCoordinator: Coordinator {
 
     // MARK: - Public Methods
     func start() {
-        let welcomeVC = WelcomeViewController()
-        welcomeVC.navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController.viewControllers.removeAll()
-        navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.pushViewController(welcomeVC, animated: true)
+        if shouldStartSignInFlow() {
+            startSignInFlow()
+        } else {
+            startOnboardingFlow()
+        }
     }
 
     // MARK: - Private Methods
     private func startSignInFlow() {
-        
+        let signInVC = SignInViewController()
+        navigationController.pushViewController(signInVC, animated: true)
     }
 
     private func startOnboardingFlow() {
-        
+        let onboardingVC = OnboardingViewController()
+        let presenter = OnboardingPresenter(view: onboardingVC, delegate: self)
+        onboardingVC.presenter = presenter
+        navigationController.pushViewController(onboardingVC, animated: true)
+        presenter.startOnboarding()
+    }
+
+    private func shouldStartSignInFlow() -> Bool {
+        // Add logic to determine whether to start sign-in flow or onboarding flow
+        return true
     }
 }
 
@@ -47,7 +51,6 @@ extension SessionCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(child: any Coordinator) {
         childCoordinators = childCoordinators.filter { $0.coordinatorType != child.coordinatorType }
         switch child.coordinatorType {
-        // TODO: - Handle Sign In case
         case .sign:
             break
         default:
