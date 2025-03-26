@@ -12,57 +12,58 @@ struct ThreeShape: Shape {
     func path(in rect: CGRect) -> Path {
         Path { path in
             path.move(to: CGPoint(
-                x: rect.minX + rect.width / 6.0,
-                y: rect.minY + 2.4 * rect.height / 6.0))
+                
+                x: rect.midX - rect.width / 6.0,
+                y: rect.minY + 3 * rect.height / 5.0))
             path.addLine(to: CGPoint(
-                x: rect.minX + rect.width / 3.0,
-                y: rect.minY + 2.4 * rect.height / 6.0))
+                x: rect.midX,
+                y: rect.minY + 3 * rect.height / 5.0))
             path.addCurve(
                 to: CGPoint(
-                    x: rect.minX + rect.width / 3.0,
-                    y: rect.minY + 11 * rect.height / 24.0),
+                    x: rect.midX,
+                    y: rect.minY + 153 * rect.height / 240.0),
                 control1: CGPoint(
-                    x: rect.minX + 4.4 * rect.width / 6.0,
-                    y: rect.minY + 6 * rect.height / 24.0),
+                    x: rect.midX + 1.5 * rect.width / 6.0,
+                    y: rect.minY + 9 * rect.height / 20.0),
                 control2: CGPoint(
-                    x: rect.minX + 5 * rect.width / 6.0,
-                    y: rect.minY + 12.5 * rect.height / 24.0))
+                    x: rect.midX + 3 * rect.width / 6.0,
+                    y: rect.minY + 163 * rect.height / 240.0))
             path.addLine(to: CGPoint(
-                x: rect.minX + rect.width / 3.0,
-                y: rect.minY + 13 * rect.height / 24.0))
+                x: rect.midX,
+                y: rect.minY + 89 * rect.height / 120.0))
             path.addCurve(
                 to: CGPoint(
-                    x: rect.minX + rect.width / 3.0,
-                    y: rect.minY + 14.4 * rect.height / 24.0),
+                    x: rect.midX,
+                    y: rect.minY + 96 * rect.height / 120.0),
                 control1: CGPoint(
-                    x: rect.minX + 5 * rect.width / 6.0,
-                    y: rect.minY + 11 * rect.height / 24.0),
+                    x: rect.midX + 3 * rect.width / 6.0,
+                    y: rect.minY + 79 * rect.height / 120.0),
                 control2: CGPoint(
-                    x: rect.minX + 5 * rect.width / 6.0,
-                    y: rect.minY + 18 * rect.height / 24.0))
+                    x: rect.midX + 1.5 * rect.width / 6.0,
+                    y: rect.minY + 114 * rect.height / 120.0))
             path.addLine(to: CGPoint(
-                x: rect.minX + rect.width / 6.0,
-                y: rect.minY + 14.4 * rect.height / 24.0))
+                x: rect.midX - rect.width / 6.0,
+                y: rect.minY + 96 * rect.height / 120.0))
             path.addCurve(
                 to: CGPoint(
-                    x: rect.minX + 2 * rect.width / 3.0,
-                    y: rect.minY + rect.height / 2.0),
+                    x: rect.midX + 1.6 * rect.width / 6.0,
+                    y: rect.minY + 7 * rect.height / 10.0),
                 control1: CGPoint(
-                    x: rect.minX + 5 * rect.width / 6.0,
-                    y: rect.minY + 21.0 * rect.height / 24.0),
+                    x: rect.minX + 4.5 * rect.width / 6.0,
+                    y: rect.minY + 131 * rect.height / 120.0),
                 control2: CGPoint(
-                    x: rect.minX + 5.5 * rect.width / 6.0,
-                    y: rect.minY + 27 * rect.height / 48.0))
+                    x: rect.minX + 7 * rect.width / 6.0,
+                    y: rect.minY + 168 * rect.height / 240.0))
             path.addCurve(
                 to: CGPoint(
-                    x: rect.minX + rect.width / 6.0,
-                    y: rect.minY + 2.4 * rect.height / 6.0),
+                    x: rect.midX - rect.width / 6.0,
+                    y: rect.minY + 3.6 * rect.height / 6.0),
                 control1: CGPoint(
-                    x: rect.minX + 6 * rect.width / 6.0,
-                    y: rect.minY + 21 * rect.height / 48.0),
+                    x: rect.minX + 7 * rect.width / 6.0,
+                    y: rect.minY + 73 * rect.height / 120.0),
                 control2: CGPoint(
-                    x: rect.minX + 3.75 * rect.width / 6.0,
-                    y: rect.minY + 3.5 * rect.height / 24.0))
+                    x: rect.minX + 4.5 * rect.width / 6.0,
+                    y: rect.minY + 83 * rect.height / 240.0))
             path.closeSubpath()
         }
     }
