@@ -1,9 +1,3 @@
-//
-//  OnboardingCoordinator.swift
-//  Gridflix
-//
-//  Created by Jenny Gallegos Cardenas on 24/09/24.
-//
 import UIKit
 
 @MainActor
@@ -25,7 +19,11 @@ final class OnboardingCoordinator: Coordinator {
 
     // MARK: - Public Methods
     func start() {
-        // TODO: - Add Onboarding Presenter instantiation
+        let onboardingVC = OnboardingViewController()
+        let presenter = OnboardingPresenter(view: onboardingVC, delegate: self)
+        onboardingVC.presenter = presenter
+        navigationController.pushViewController(onboardingVC, animated: true)
+        presenter.startOnboarding()
     }
 
     // MARK: - Private Methods

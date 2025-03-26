@@ -1,9 +1,3 @@
-//
-//  AppCoordinator.swift
-//  Gridflix
-//
-//  Created by Jenny Gallegos Cardenas on 19/09/24.
-//
 import UIKit
 import SwiftUI
 
@@ -61,7 +55,8 @@ final class AppCoordinator: Coordinator {
     }
 
     private func startTabFlow() {
-        // TODO: - Start the main app flow
+        let mainTabBarController = MainTabBarController(container: dependencyRepository)
+        navigationController.pushViewController(mainTabBarController, animated: true)
     }
 
     private func startSessionFlow() {

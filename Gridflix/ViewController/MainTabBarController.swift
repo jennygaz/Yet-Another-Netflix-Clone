@@ -1,10 +1,3 @@
-//
-//  MainTabBarController.swift
-//  Gridflix
-//
-//  Created by Jenny Gallegos Cardenas on 12/09/24.
-//
-
 import UIKit
 
 final class MainTabBarController: NiblessTabBarController {
@@ -20,7 +13,7 @@ final class MainTabBarController: NiblessTabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let navigationControllers: [UINavigationController] = []// container.makeTabViewControllers()
+        let navigationControllers: [UINavigationController] = container.mainPresenter.makeTabViewControllers()
         configureTabBar(for: navigationControllers)
         setViewControllers(navigationControllers, animated: true)
     }
@@ -28,7 +21,12 @@ final class MainTabBarController: NiblessTabBarController {
     // MARK: - Private methods
     private func configureTabBar(for controllers: [UINavigationController]) {
         for (controller, item) in zip(controllers, TabItem.allCases) {
-            
+            let tabBarItem = UITabBarItem(
+                title: item.title,
+                image: UIImage(systemName: item.imageName),
+                selectedImage: UIImage(systemName: item.imageName + ".fill")
+            )
+            controller.tabBarItem = tabBarItem
         }
     }
 }
@@ -39,19 +37,27 @@ enum TabItem: CaseIterable {
     case news
     case profile
 
+    var title: String {
+        switch self {
+        case .home:    return "Home"
+        case .games:   return "Games"
+        case .news:    return "News"
+        case .profile: return "Profile"
+        }
+    }
+
     var imageName: String {
         switch self {
         case .home:    return "house"
         case .games:   return "gamecontroller"
         case .news:    return "play.square.stack"
-        case .profile: return ""
+        case .profile: return "person"
         }
     }
 
     var imageType: ImageType {
         switch self {
-        case .home, .games, .news: return .system
-        case .profile: return .custom
+        case .home, .games, .news, .profile: return .system
         }
     }
     
