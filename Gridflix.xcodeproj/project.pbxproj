@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		178947372CA381ED00598BE3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 178947362CA381ED00598BE3 /* Lottie */; };
+		1790A2E42D9672DF00AD3E4A /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = 1790A2E32D9672DF00AD3E4A /* Perception */; };
+		1790A2E62D9672E500AD3E4A /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = 1790A2E52D9672E500AD3E4A /* Perception */; };
 		17BAC0A72CC2DB1E0078F69D /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = 17BAC0A62CC2DB1E0078F69D /* Perception */; };
 		17C0B5B42CED0CF600A04AC5 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = 17C0B5B32CED0CF600A04AC5 /* TODO.md */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1790A2E42D9672DF00AD3E4A /* Perception in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,12 +91,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1790A2E62D9672E500AD3E4A /* Perception in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1790A2E22D9672DF00AD3E4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		17A843FA2C936DAF008721D5 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +112,7 @@
 				17A844052C936DAF008721D5 /* Gridflix */,
 				17A8441C2C936DB0008721D5 /* GridflixTests */,
 				17A844262C936DB0008721D5 /* GridflixUITests */,
+				1790A2E22D9672DF00AD3E4A /* Frameworks */,
 				17A844042C936DAF008721D5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -160,6 +172,7 @@
 			);
 			name = GridflixTests;
 			packageProductDependencies = (
+				1790A2E32D9672DF00AD3E4A /* Perception */,
 			);
 			productName = GridflixTests;
 			productReference = 17A844192C936DB0008721D5 /* GridflixTests.xctest */;
@@ -183,6 +196,7 @@
 			);
 			name = GridflixUITests;
 			packageProductDependencies = (
+				1790A2E52D9672E500AD3E4A /* Perception */,
 			);
 			productName = GridflixUITests;
 			productReference = 17A844232C936DB0008721D5 /* GridflixUITests.xctest */;
@@ -627,6 +641,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 178947352CA381ED00598BE3 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		1790A2E32D9672DF00AD3E4A /* Perception */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17BAC0A52CC2DB1E0078F69D /* XCRemoteSwiftPackageReference "swift-perception" */;
+			productName = Perception;
+		};
+		1790A2E52D9672E500AD3E4A /* Perception */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17BAC0A52CC2DB1E0078F69D /* XCRemoteSwiftPackageReference "swift-perception" */;
+			productName = Perception;
 		};
 		17BAC0A62CC2DB1E0078F69D /* Perception */ = {
 			isa = XCSwiftPackageProductDependency;
