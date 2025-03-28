@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		178947372CA381ED00598BE3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 178947362CA381ED00598BE3 /* Lottie */; };
-		17BAC0A72CC2DB1E0078F69D /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = 17BAC0A62CC2DB1E0078F69D /* Perception */; };
 		17C0B5B42CED0CF600A04AC5 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = 17C0B5B32CED0CF600A04AC5 /* TODO.md */; };
 /* End PBXBuildFile section */
 
@@ -20,19 +19,11 @@
 			remoteGlobalIDString = 17A844022C936DAF008721D5;
 			remoteInfo = Gridflix;
 		};
-		17A844242C936DB0008721D5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 17A843FB2C936DAF008721D5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 17A844022C936DAF008721D5;
-			remoteInfo = Gridflix;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		17A844032C936DAF008721D5 /* Gridflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gridflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A844192C936DB0008721D5 /* GridflixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridflixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		17A844232C936DB0008721D5 /* GridflixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridflixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17C0B5B32CED0CF600A04AC5 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,11 +51,6 @@
 			path = GridflixTests;
 			sourceTree = "<group>";
 		};
-		17A844262C936DB0008721D5 /* GridflixUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = GridflixUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +59,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				178947372CA381ED00598BE3 /* Lottie in Frameworks */,
-				17BAC0A72CC2DB1E0078F69D /* Perception in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,23 +69,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		17A844202C936DB0008721D5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1790A2E22D9672DF00AD3E4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		17A843FA2C936DAF008721D5 = {
 			isa = PBXGroup;
 			children = (
 				17C0B5B32CED0CF600A04AC5 /* TODO.md */,
 				17A844052C936DAF008721D5 /* Gridflix */,
 				17A8441C2C936DB0008721D5 /* GridflixTests */,
-				17A844262C936DB0008721D5 /* GridflixUITests */,
+				1790A2E22D9672DF00AD3E4A /* Frameworks */,
 				17A844042C936DAF008721D5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,7 +95,6 @@
 			children = (
 				17A844032C936DAF008721D5 /* Gridflix.app */,
 				17A844192C936DB0008721D5 /* GridflixTests.xctest */,
-				17A844232C936DB0008721D5 /* GridflixUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,7 +120,6 @@
 			name = Gridflix;
 			packageProductDependencies = (
 				178947362CA381ED00598BE3 /* Lottie */,
-				17BAC0A62CC2DB1E0078F69D /* Perception */,
 			);
 			productName = Gridflix;
 			productReference = 17A844032C936DAF008721D5 /* Gridflix.app */;
@@ -165,29 +148,6 @@
 			productReference = 17A844192C936DB0008721D5 /* GridflixTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		17A844222C936DB0008721D5 /* GridflixUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 17A844342C936DB0008721D5 /* Build configuration list for PBXNativeTarget "GridflixUITests" */;
-			buildPhases = (
-				17A8441F2C936DB0008721D5 /* Sources */,
-				17A844202C936DB0008721D5 /* Frameworks */,
-				17A844212C936DB0008721D5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				17A844252C936DB0008721D5 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				17A844262C936DB0008721D5 /* GridflixUITests */,
-			);
-			name = GridflixUITests;
-			packageProductDependencies = (
-			);
-			productName = GridflixUITests;
-			productReference = 17A844232C936DB0008721D5 /* GridflixUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -205,10 +165,6 @@
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = 17A844022C936DAF008721D5;
 					};
-					17A844222C936DB0008721D5 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = 17A844022C936DAF008721D5;
-					};
 				};
 			};
 			buildConfigurationList = 17A843FE2C936DAF008721D5 /* Build configuration list for PBXProject "Gridflix" */;
@@ -222,7 +178,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				178947352CA381ED00598BE3 /* XCRemoteSwiftPackageReference "lottie-spm" */,
-				17BAC0A52CC2DB1E0078F69D /* XCRemoteSwiftPackageReference "swift-perception" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 17A844042C936DAF008721D5 /* Products */;
@@ -231,7 +186,6 @@
 			targets = (
 				17A844022C936DAF008721D5 /* Gridflix */,
 				17A844182C936DB0008721D5 /* GridflixTests */,
-				17A844222C936DB0008721D5 /* GridflixUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -246,13 +200,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		17A844172C936DB0008721D5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		17A844212C936DB0008721D5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -276,13 +223,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		17A8441F2C936DB0008721D5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -290,11 +230,6 @@
 			isa = PBXTargetDependency;
 			target = 17A844022C936DAF008721D5 /* Gridflix */;
 			targetProxy = 17A8441A2C936DB0008721D5 /* PBXContainerItemProxy */;
-		};
-		17A844252C936DB0008721D5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 17A844022C936DAF008721D5 /* Gridflix */;
-			targetProxy = 17A844242C936DB0008721D5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -316,7 +251,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -351,7 +286,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -421,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -478,7 +413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -496,7 +431,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8CSXQ3YTP6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.griddynamics.GridflixTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -515,7 +450,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8CSXQ3YTP6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.griddynamics.GridflixTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -523,40 +458,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gridflix.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Gridflix";
-			};
-			name = Release;
-		};
-		17A844352C936DB0008721D5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8CSXQ3YTP6;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.griddynamics.GridflixUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Gridflix;
-			};
-			name = Debug;
-		};
-		17A844362C936DB0008721D5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8CSXQ3YTP6;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.griddynamics.GridflixUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Gridflix;
 			};
 			name = Release;
 		};
@@ -590,15 +491,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17A844342C936DB0008721D5 /* Build configuration list for PBXNativeTarget "GridflixUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				17A844352C936DB0008721D5 /* Debug */,
-				17A844362C936DB0008721D5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -610,14 +502,6 @@
 				minimumVersion = 4.5.0;
 			};
 		};
-		17BAC0A52CC2DB1E0078F69D /* XCRemoteSwiftPackageReference "swift-perception" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-perception";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.5;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -625,11 +509,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 178947352CA381ED00598BE3 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
-		};
-		17BAC0A62CC2DB1E0078F69D /* Perception */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17BAC0A52CC2DB1E0078F69D /* XCRemoteSwiftPackageReference "swift-perception" */;
-			productName = Perception;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
