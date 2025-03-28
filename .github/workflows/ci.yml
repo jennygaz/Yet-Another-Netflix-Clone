@@ -24,3 +24,6 @@ jobs:
 
       - name: Build and test
         run: xcodebuild test -scheme Gridflix -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.5'
+
+      - name: Run unit tests
+        run: xcodebuild test -scheme GridflixTests -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.5'
