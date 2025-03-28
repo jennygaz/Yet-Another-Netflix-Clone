@@ -1,6 +1,9 @@
 import Testing
+import CoreGraphics
+import UIKit
 @testable import Gridflix
 
+@MainActor
 struct ComponentsTests {
 
     @Test func testBadgedUIButton() async throws {

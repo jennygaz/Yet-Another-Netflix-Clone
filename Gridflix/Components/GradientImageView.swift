@@ -10,7 +10,7 @@ import UIKit
 @MainActor
 public class GradientImageView: UIImageView {
     // MARK: - Properties
-    private var colors: [UIColor] = [] {
+    private(set) public var colors: [UIColor] = [] {
         didSet { updateGradient() }
     }
 
@@ -22,7 +22,7 @@ public class GradientImageView: UIImageView {
         didSet { updateGradient() }
     }
 
-    private var stops: [Stop] = [] {
+    private(set) public var stops: [Stop] = [] {
         didSet { updateGradient() }
     }
     private lazy var gradientLayer: CAGradientLayer = {
@@ -109,6 +109,8 @@ public extension GradientImageView {
         let point: NSNumber
     }
 }
+extension GradientImageView.Stop: Equatable {}
+
 // MARK: - Lifecycle methods
 public extension GradientImageView {
     override func didMoveToSuperview() {

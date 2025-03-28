@@ -15,7 +15,7 @@ struct CarouselModel {
 final class CarouselItemView: UICollectionViewCell {
     static let identifier: String = "CarouselItemView"
     // MARK: - Properties
-    private var model: CarouselModel = .init(imageName: "naruto_hero_view", text: "Naruto Shippuden")
+    var model: CarouselModel = .init(imageName: "naruto_hero_view", text: "Naruto Shippuden")
 
     lazy var imageView: UIImageView = {
         let image = UIImage(named: model.imageName)
